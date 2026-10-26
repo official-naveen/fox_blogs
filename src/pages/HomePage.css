@@ -97,3 +97,28 @@
     margin-right: auto;
   }
 }
+
+@media (max-width: 520px) {
+  /* two even columns instead of a ragged centred wrap */
+  .topics-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+  .topic-pill {
+    justify-content: center;
+    padding: 0.65rem 0.8rem;
+  }
+  .topic-pill:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  .cta-band {
+    padding-top: 3rem;
+  }
+  .cta-band__inner {
+    padding: 2.25rem 1.25rem;
+  }
+  .author-teaser img {
+    max-width: 200px;
+  }
+}

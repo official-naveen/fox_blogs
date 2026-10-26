@@ -163,7 +163,7 @@ h4 {
   margin-bottom: 0.6rem;
 }
 .page-hero {
-  padding: 4rem 0 2.5rem;
+  padding: 4rem 1.25rem 2.5rem;
   text-align: center;
 }
 .page-hero h1 {
@@ -444,4 +444,30 @@ button.tag:hover {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--on-accent);
+}
+
+/* ---- Mobile robustness ---- */
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+body {
+  overflow-x: clip;
+}
+img,
+video,
+svg {
+  max-width: 100%;
+}
+@media (max-width: 520px) {
+  .page-hero {
+    padding: 2.25rem 1.25rem 1.75rem;
+  }
+  .page-hero p {
+    font-size: 1rem;
+  }
+  .section-head {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }

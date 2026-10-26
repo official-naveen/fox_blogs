@@ -167,3 +167,44 @@
   font-weight: 600;
   font-size: 0.92rem;
 }
+
+@media (max-width: 520px) {
+  .post__header {
+    padding-top: 1.5rem;
+    padding-bottom: 1.25rem;
+  }
+  .post__header h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin: 0.7rem 0 1.1rem;
+  }
+  .breadcrumbs {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .post__cover img {
+    max-height: 240px;
+    border-radius: var(--radius-sm);
+  }
+  .post__content {
+    padding-top: 1.5rem;
+  }
+  .post__footer {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2rem;
+  }
+  .share-bar {
+    flex-wrap: wrap;
+  }
+  .author-box {
+    padding: 1.1rem;
+    gap: 0.9rem;
+  }
+  .post__related {
+    margin-top: 3rem;
+  }
+  .post__tags {
+    margin-top: 1.75rem;
+  }
+}

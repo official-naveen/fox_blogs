@@ -41,12 +41,6 @@ function BlogPosts() {
     return map;
   }, [posts]);
 
-  const popularTags = useMemo(() => {
-    const map = {};
-    posts.forEach((p) => (p.tags || []).forEach((t) => (map[t] = (map[t] || 0) + 1)));
-    return Object.entries(map).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 14);
-  }, [posts]);
-
   const results = useMemo(() => {
     const term = q.toLowerCase();
     let list = posts.filter((p) => {
@@ -114,14 +108,12 @@ function BlogPosts() {
         </label>
       </div>
 
-      {popularTags.length > 0 && (
-        <div className="container blog-tags" role="group" aria-label="Popular tags">
-          <span className="blog-tags__label"><i className="fa-solid fa-hashtag"></i> Tags</span>
-          {popularTags.map(([t, n]) => (
-            <button key={t} type="button" className={`tag ${tag === t ? "is-active" : ""}`} onClick={() => setParam("tag", tag === t ? "" : t)}>
-              #{t} <span className="chip__count">{n}</span>
-            </button>
-          ))}
+      {tag && (
+        <div className="container blog-active">
+          <span>Showing posts tagged</span>
+          <button type="button" className="tag is-active" onClick={() => setParam("tag", "")} aria-label={`Remove tag filter ${tag}`}>
+            #{tag} <i className="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
         </div>
       )}
 

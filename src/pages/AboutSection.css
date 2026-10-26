@@ -87,8 +87,18 @@
 }
 .about-connect__links {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.6rem;
+}
+@media (max-width: 520px) {
+  .about-connect {
+    padding: 1.4rem 1.1rem;
+  }
+  .about-connect__links .btn-primary {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
 }
 @media (max-width: 860px) {
   .about-hero {

@@ -4,6 +4,7 @@
   line-height: 1.8;
   color: var(--text);
   overflow-wrap: break-word;
+  min-width: 0;
 }
 .prose > * + * {
   margin-top: 1.25em;
@@ -107,4 +108,23 @@
 }
 @media (max-width: 600px) {
   .prose { font-size: 1.02rem; }
+}
+
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.prose pre {
+  max-width: 100%;
+}
+@media (max-width: 520px) {
+  .prose h2 { font-size: 1.4rem; }
+  .prose h3 { font-size: 1.2rem; }
+  .prose pre {
+    font-size: 0.82rem;
+    padding: 1rem;
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+  }
 }

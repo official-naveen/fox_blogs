@@ -16,7 +16,7 @@
   box-shadow: var(--shadow-md);
   font-weight: 500;
   font-size: 0.93rem;
-  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
 }
 .fox-blog-notifier-show {
   opacity: 1;
@@ -24,7 +24,8 @@
 }
 .fox-blog-notifier-hide {
   opacity: 0;
-  transform: translateX(30px);
+  visibility: hidden;
+  transform: translateY(-10px);
   pointer-events: none;
 }
 .fox-blog-notifier-success { border-left-color: var(--success); }

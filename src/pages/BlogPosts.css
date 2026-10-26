@@ -52,16 +52,40 @@
   }
 }
 
-.blog-tags {
+.blog-active {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
-  margin: -0.75rem auto 2rem;
-}
-.blog-tags__label {
-  font-size: 0.85rem;
-  font-weight: 700;
+  gap: 0.6rem;
+  margin: -0.75rem auto 1.5rem;
   color: var(--muted);
-  margin-right: 0.25rem;
+  font-size: 0.9rem;
+}
+.blog-active .tag i {
+  font-size: 0.7rem;
+  margin-left: 0.15rem;
+}
+@media (max-width: 640px) {
+  .blog-controls {
+    gap: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  /* category chips become one swipeable row instead of wrapping into clutter */
+  .blog-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 0 -1.25rem;
+    padding: 0.1rem 1.25rem 0.35rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .blog-filters::-webkit-scrollbar {
+    display: none;
+  }
+  .blog-filters .chip {
+    flex: 0 0 auto;
+  }
+  .blog-sort .select {
+    width: 100%;
+  }
 }

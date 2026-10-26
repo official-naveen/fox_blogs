@@ -1,0 +1,49 @@
+.reloader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(6px);
+  animation: pageIn 0.2s ease backwards;
+}
+.reloader__box {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.reloader__fox {
+  display: block;
+  font-size: 2.8rem;
+  animation: bob 1s ease-in-out infinite;
+}
+.reloader__bar {
+  width: 140px;
+  height: 4px;
+  margin: 0.8rem auto 0.6rem;
+  border-radius: 4px;
+  background: var(--border);
+  overflow: hidden;
+}
+.reloader__bar span {
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  animation: slide 1.1s ease-in-out infinite;
+}
+@keyframes bob {
+  50% {
+    transform: translateY(-8px) rotate(-6deg);
+  }
+}
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}

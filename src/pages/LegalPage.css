@@ -1,0 +1,11 @@
+.legal {
+  padding-bottom: 2rem;
+}
+.legal h2 {
+  font-size: 1.35rem;
+  margin: 2rem 0 0.5rem;
+}
+.legal p {
+  color: var(--muted);
+  font-size: 1.03rem;
+}

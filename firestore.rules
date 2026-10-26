@@ -1,0 +1,104 @@
+rules_version = '2';
+
+// Paste into Firebase console → Firestore Database → Rules, then Publish.
+// To make yourself an admin: sign up on the site, open the `users` collection
+// in the console, find the document whose ID is your uid, and change
+// role from "user" to "admin".
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Blog posts.
+    //  - Public can read "published" and "scheduled" posts (the site hides a
+    //    scheduled post until its publish time). Drafts are admin-only.
+    //  - Posts made before statuses existed (no `status` field) can still be
+    //    opened directly; they are upgraded the first time an admin opens Posts.
+    //  - Only admins can create, edit or delete posts.
+    match /posts/{postId} {
+      allow get: if !('status' in resource.data)
+        || resource.data.status in ['published', 'scheduled']
+        || isAdmin();
+      allow list: if resource.data.status in ['published', 'scheduled'] || isAdmin();
+      allow write: if isAdmin();
+
+      // Likes: one document per person, named after their uid.
+      match /likes/{uid} {
+        allow read: if true;
+        allow create: if signedIn() && uid == request.auth.uid
+          && request.resource.data.uid == request.auth.uid;
+        allow delete: if signedIn() && uid == request.auth.uid;
+      }
+    }
+
+    // User profiles.
+    //  - read: your own profile (or admin)
+    //  - create: your own profile, only as a plain "user"
+    //  - update: you may change your own name, never your role or email
+    match /users/{userId} {
+      allow read: if isAdmin()
+        || (signedIn() && (userId == request.auth.uid
+            || resource.data.email == request.auth.token.email));
+      allow create: if isAdmin()
+        || (signedIn() && userId == request.auth.uid
+            && request.resource.data.role == 'user'
+            && request.resource.data.email == request.auth.token.email);
+      allow update: if isAdmin()
+        || (signedIn() && userId == request.auth.uid
+            && request.resource.data.role == resource.data.role
+            && request.resource.data.email == resource.data.email);
+      allow delete: if isAdmin();
+
+      // Saved posts: private to the owner.
+      match /bookmarks/{postId} {
+        allow read, write: if signedIn() && request.auth.uid == userId;
+      }
+    }
+
+    // Comments (and replies, which carry a parentId).
+    //  - anyone can read
+    //  - signed-in users post as themselves
+    //  - authors can edit their own text, or delete; admins can delete anything
+    match /comments/{commentId} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.postId is string
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 1000
+        && (!('parentId' in request.resource.data)
+            || request.resource.data.parentId == null
+            || request.resource.data.parentId is string);
+      allow update: if signedIn() && resource.data.uid == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['text', 'editedAt', 'deleted'])
+        && request.resource.data.text.size() <= 1000;
+      allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+
+    // Contact form: anyone can send, only admins can read / manage.
+    match /messages/{id} {
+      allow create: if request.resource.data.name is string
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.email is string
+        && request.resource.data.message is string
+        && request.resource.data.message.size() <= 2000;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Newsletter: anyone can subscribe, only admins can read / remove.
+    match /subscribers/{id} {
+      allow create: if request.resource.data.email is string
+        && request.resource.data.email.size() <= 200;
+      allow read, delete: if isAdmin();
+    }
+  }
+}

@@ -1,0 +1,110 @@
+/* Long-form reading typography */
+.prose {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text);
+  overflow-wrap: break-word;
+}
+.prose > * + * {
+  margin-top: 1.25em;
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin-top: 2em;
+  margin-bottom: 0.4em;
+  line-height: 1.25;
+}
+.prose h2 { font-size: 1.75rem; }
+.prose h3 { font-size: 1.4rem; }
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+}
+.prose li + li {
+  margin-top: 0.4em;
+}
+.prose img {
+  height: auto;
+  border-radius: var(--radius-sm);
+  margin: 1.5em auto;
+}
+.prose blockquote {
+  padding: 0.5rem 1.25rem;
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-style: italic;
+}
+.prose code {
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  background: var(--surface-2);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.88em;
+}
+.prose pre {
+  position: relative;
+  padding: 1.25rem 1.25rem 1.25rem;
+  border-radius: var(--radius-sm);
+  background: #2d2a2e;
+  color: #f8f8f2;
+  overflow-x: auto;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  tab-size: 2;
+}
+.prose pre code {
+  padding: 0;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+  text-shadow: none;
+}
+.copy-code-button {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8f8f2;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.85;
+}
+.copy-code-button:hover {
+  background: rgba(255, 255, 255, 0.22);
+  opacity: 1;
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.prose th,
+.prose td {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+.prose th {
+  background: var(--surface-2);
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2.5em 0;
+}
+@media (max-width: 600px) {
+  .prose { font-size: 1.02rem; }
+}

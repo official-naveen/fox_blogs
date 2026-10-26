@@ -1,0 +1,32 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(10, 6, 3, 0.55);
+  backdrop-filter: blur(3px);
+  animation: pageIn 0.15s ease backwards;
+}
+.modal {
+  width: min(440px, 100%);
+  padding: 1.75rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+.modal-title {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.modal-message {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}

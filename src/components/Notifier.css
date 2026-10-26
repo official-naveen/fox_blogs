@@ -1,0 +1,44 @@
+.fox-blog-notifier {
+  position: fixed;
+  top: calc(var(--header-h) + 12px);
+  right: 1rem;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: min(420px, calc(100vw - 2rem));
+  padding: 0.85rem 1rem 0.85rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--info);
+  box-shadow: var(--shadow-md);
+  font-weight: 500;
+  font-size: 0.93rem;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.fox-blog-notifier-show {
+  opacity: 1;
+  transform: none;
+}
+.fox-blog-notifier-hide {
+  opacity: 0;
+  transform: translateX(30px);
+  pointer-events: none;
+}
+.fox-blog-notifier-success { border-left-color: var(--success); }
+.fox-blog-notifier-error { border-left-color: var(--danger); }
+.fox-blog-notifier-warning { border-left-color: var(--warning); }
+.fox-blog-notifier-info { border-left-color: var(--info); }
+.fox-blog-notifier-close-btn {
+  margin-left: auto;
+  border: 0;
+  background: none;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--muted);
+}
+.fox-blog-notifier-close-btn:hover {
+  color: var(--text);
+}
